@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctbqfe6jsmrpf"]
+[gd_scene load_steps=9 format=3 uid="uid://ctbqfe6jsmrpf"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
 [ext_resource type="Texture2D" uid="uid://d3p2wdvbxnj17" path="res://assets/sprites/enemyIdleanim.png" id="2_jsyrq"]
 [ext_resource type="PackedScene" uid="uid://2q3gfbn6rw51" path="res://src/enemy_spawner.tscn" id="3_vxv3x"]
 [ext_resource type="Texture2D" uid="uid://drend5dvhqx5o" path="res://assets/sprites/chamber.png" id="4_8hpxv"]
 [ext_resource type="Texture2D" uid="uid://xdbrqisykt4i" path="res://assets/sprites/selectedSlot.png" id="5_g620u"]
+[ext_resource type="FontFile" uid="uid://cv4hf6knhmo43" path="res://assets/resources/cc.yal.6w6.block.uc.ttf" id="6_u4y3o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1iaq"]
 size = Vector2(11, 30)
@@ -13,6 +14,7 @@ size = Vector2(11, 30)
 size = Vector2(384, 216)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 2
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_fq5sw")
@@ -65,3 +67,11 @@ texture = ExtResource("5_g620u")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+offset_left = -110.0
+offset_top = -99.0
+offset_right = -5.0
+offset_bottom = -59.0
+theme_override_fonts/normal_font = ExtResource("6_u4y3o")
+text = "Score: "

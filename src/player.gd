@@ -10,6 +10,7 @@ class_name Player
 @onready var chamber_sprite : Object = $ChamberSprite
 @onready var enemy_spawn_timer : Object = $EnemySpawnTimer
 @onready var hurtbox : Object = $Hurtbox
+@onready var score_label : Object = $ScoreLabel
 
 @onready var chamber = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
@@ -18,6 +19,8 @@ class_name Player
 @onready var hearts : int = 3
 @onready var facing_direction : int = 1
 @onready var speed : int = 15
+
+@onready var score : int = 0
 
 func _ready():
 	input_timer.wait_time = 0.1
@@ -29,7 +32,7 @@ func _physics_process(delta):
 	take_input()
 	move()
 	update_animations()
-	
+	update_score()
 	spawn_enemies()
 
 func fire():
@@ -70,7 +73,10 @@ func update_animations():
 		sprite.flip_h = 1
 	elif facing_direction > 0:
 		sprite.flip_h = 0
-		
+
+func update_score():
+	score_label.text = "Score: " + str(score)
+
 func spawn_enemies():
 	if enemy_spawn_timer.is_stopped():
 		var rng = RandomNumberGenerator.new()
