@@ -6,9 +6,10 @@ extends Node2D
 
 func _ready():
 	RenderingServer.set_default_clear_color(Color.SKY_BLUE)
+	spawn_player()
 	spawn_map(0)
 	spawn_map(1)
-	spawn_player()
+	spawn_map(-1)
 	
 func _process(delta):
 	pass

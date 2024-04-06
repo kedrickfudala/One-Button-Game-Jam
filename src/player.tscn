@@ -29,9 +29,11 @@ texture = ExtResource("2_jsyrq")
 position = Vector2(-0.5, -15)
 shape = SubResource("RectangleShape2D_q1iaq")
 
-[node name="MapArea" type="Area2D" parent="."]
+[node name="MapDetect" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
 
-[node name="Area2D" type="CollisionShape2D" parent="MapArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapDetect"]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_ciftm")
 

@@ -3,7 +3,7 @@ class_name Player
 
 @onready var sprite : Object = $Sprite2D
 @onready var input_timer : Object = $InputTimer
-@onready var map_area : Object = $MapArea
+@onready var map_detect : Object = $MapDetect
 @onready var animation_player : Object = $AnimationPlayer
 @onready var enemy_spawner1 : Object = $EnemySpawner1
 @onready var enemy_spawner2 : Object = $EnemySpawner2
@@ -12,18 +12,17 @@ class_name Player
 @onready var chamber = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
 @onready var chamber_spin : float = 0.0
-@onready var temp_spin : float = 0.0
 
 @onready var hearts : int = 3
 @onready var facing_direction : int = 1
 @onready var speed : int = 15
 
 func _ready():
-	input_timer.wait_time = 0.15
+	input_timer.wait_time = 0.1
 	input_timer.one_shot = true
 
 func _physics_process(delta):
-	take_input(delta)
+	take_input()
 	move()
 	update_animations()
 
@@ -33,7 +32,7 @@ func fire():
 	print("CSLOT " + str(chamber_slot) + " CSPIN " + str(chamber_spin))
 	print("FIRE " + str(chamber[chamber_slot]))
 
-func take_input(delta):
+func take_input():
 	if get_global_mouse_position().x > self.global_position.x:
 		facing_direction = 1
 	else:

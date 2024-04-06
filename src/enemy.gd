@@ -7,12 +7,17 @@ class_name Enemy
 @onready var hitbox : Object = $HitboxArea/Hitbox
 
 @onready var facing_direction : int = 0
+@onready var speed : int = 5
 
 func _ready():
 	pass
 	
 func _physics_process(delta):
 	pass
+
+func move():
+	velocity = Vector2(speed * facing_direction, 0)
+	move_and_slide()
 
 func die():
 	self.queue_free()
