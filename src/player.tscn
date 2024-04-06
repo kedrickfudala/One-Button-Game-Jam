@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctbqfe6jsmrpf"]
+[gd_scene load_steps=8 format=3 uid="uid://ctbqfe6jsmrpf"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
 [ext_resource type="Texture2D" uid="uid://d3p2wdvbxnj17" path="res://assets/sprites/enemyIdleanim.png" id="2_jsyrq"]
 [ext_resource type="PackedScene" uid="uid://2q3gfbn6rw51" path="res://src/enemy_spawner.tscn" id="3_vxv3x"]
+[ext_resource type="Texture2D" uid="uid://drend5dvhqx5o" path="res://assets/sprites/chamber.png" id="4_8hpxv"]
+[ext_resource type="Texture2D" uid="uid://xdbrqisykt4i" path="res://assets/sprites/selectedSlot.png" id="5_g620u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1iaq"]
 size = Vector2(11, 30)
@@ -42,3 +44,13 @@ position = Vector2(-200, 0)
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("3_vxv3x")]
 position = Vector2(200, 0)
+
+[node name="ChamberSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_8hpxv")
+
+[node name="SelectedSlot" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_g620u")
