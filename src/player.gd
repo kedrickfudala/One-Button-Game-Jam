@@ -3,9 +3,7 @@ class_name Player
 
 @onready var sprite : Object = $Sprite2D
 @onready var input_timer : Object = $InputTimer
-@onready var chamber_cycle : Object = $ChamberCycle
 @onready var map_area : Object = $MapArea
-@onready var map_frame : Object = $MapArea/MapFrame
 @onready var animation_player : Object = $AnimationPlayer
 @onready var enemy_spawner1 : Object = $EnemySpawner1
 @onready var enemy_spawner2 : Object = $EnemySpawner2
@@ -19,7 +17,6 @@ class_name Player
 func _ready():
 	input_timer.wait_time = 0.3
 	input_timer.one_shot = true
-	chamber_cycle.wait_time = 6
 
 func _physics_process(delta):
 	take_input()

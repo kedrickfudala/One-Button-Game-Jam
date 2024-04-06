@@ -29,13 +29,11 @@ shape = SubResource("RectangleShape2D_q1iaq")
 
 [node name="MapArea" type="Area2D" parent="."]
 
-[node name="MapFrame" type="CollisionShape2D" parent="MapArea"]
+[node name="Area2D" type="CollisionShape2D" parent="MapArea"]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_ciftm")
 
 [node name="InputTimer" type="Timer" parent="."]
-
-[node name="ChamberCycle" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
