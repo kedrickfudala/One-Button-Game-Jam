@@ -3,17 +3,17 @@ class_name Enemy
 
 @onready var sprite : Object = $Sprite2D
 @onready var animation_olayer : Object = $AnimationPlayer
-@onready var hitbox_area : Object = $HitboxArea
-@onready var hitbox : Object = $HitboxArea/Hitbox
+@onready var hitbox : Object = $Hitbox
+@onready var hurtbox : Object = $Hurtbox
 
 @onready var facing_direction : int = 0
-@onready var speed : int = 5
+@onready var speed : int = 17
 
 func _ready():
 	pass
 	
 func _physics_process(delta):
-	pass
+	move()
 
 func move():
 	velocity = Vector2(speed * facing_direction, 0)

@@ -8,6 +8,8 @@ class_name Player
 @onready var enemy_spawner1 : Object = $EnemySpawner1
 @onready var enemy_spawner2 : Object = $EnemySpawner2
 @onready var chamber_sprite : Object = $ChamberSprite
+@onready var enemy_spawn_timer : Object = $EnemySpawnTimer
+@onready var hurtbox : Object = $Hurtbox
 
 @onready var chamber = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
@@ -20,11 +22,15 @@ class_name Player
 func _ready():
 	input_timer.wait_time = 0.1
 	input_timer.one_shot = true
+	enemy_spawn_timer.wait_time = 4
+	enemy_spawn_timer.one_shot = true
 
 func _physics_process(delta):
 	take_input()
 	move()
 	update_animations()
+	
+	spawn_enemies()
 
 func fire():
 	chamber_slot = fmod(snapped(chamber_slot, 1), 6)
@@ -64,3 +70,13 @@ func update_animations():
 		sprite.flip_h = 1
 	elif facing_direction > 0:
 		sprite.flip_h = 0
+		
+func spawn_enemies():
+	if enemy_spawn_timer.is_stopped():
+		var rng = RandomNumberGenerator.new()
+		var random_number = snapped(rng.randf_range(0, 1), 1)
+		if random_number == 0:
+			enemy_spawner1.spawn_enemy(1)
+		else:
+			enemy_spawner2.spawn_enemy(-1)
+		enemy_spawn_timer.start()
