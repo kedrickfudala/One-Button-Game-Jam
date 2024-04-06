@@ -11,6 +11,7 @@ class_name Player
 @onready var enemy_spawn_timer : Object = $EnemySpawnTimer
 @onready var hurtbox : Object = $Hurtbox
 @onready var score_label : Object = $ScoreLabel
+@onready var raycast : Object = $RayCast2D
 
 @onready var chamber = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
@@ -40,6 +41,8 @@ func fire():
 	chamber_spin = 0
 	print("CSLOT " + str(chamber_slot) + " CSPIN " + str(chamber_spin))
 	print("FIRE " + str(chamber[chamber_slot]))
+	var test = raycast.get_collider()
+	print(test)
 
 func take_input():
 	if get_global_mouse_position().x > self.global_position.x:
