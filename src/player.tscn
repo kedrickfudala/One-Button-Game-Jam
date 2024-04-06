@@ -1,8 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctbqfe6jsmrpf"]
+[gd_scene load_steps=6 format=3 uid="uid://ctbqfe6jsmrpf"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
+[ext_resource type="Texture2D" uid="uid://d3p2wdvbxnj17" path="res://assets/sprites/enemyIdleanim.png" id="2_jsyrq"]
+[ext_resource type="PackedScene" uid="uid://2q3gfbn6rw51" path="res://src/enemy_spawner.tscn" id="3_vxv3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1iaq"]
+size = Vector2(11, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ciftm"]
+size = Vector2(384, 216)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 8
 script = ExtResource("1_fq5sw")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -25)
+zoom = Vector2(3, 3)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_jsyrq")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -15)
+shape = SubResource("RectangleShape2D_q1iaq")
+
+[node name="MapArea" type="Area2D" parent="."]
+
+[node name="MapFrame" type="CollisionShape2D" parent="MapArea"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_ciftm")
+
+[node name="InputTimer" type="Timer" parent="."]
+
+[node name="ChamberCycle" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="EnemySpawner1" parent="." instance=ExtResource("3_vxv3x")]
+position = Vector2(-200, 0)
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_vxv3x")]
+position = Vector2(200, 0)

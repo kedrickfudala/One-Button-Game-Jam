@@ -14,3 +14,18 @@ config/name="One Button Game Jam"
 run/main_scene="res://src/levels/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="player_attacks"
+2d_physics/layer_4="enemies"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
