@@ -10,7 +10,7 @@ class_name Enemy
 @onready var animate : int = 1
 @onready var flip : int = 1
 @onready var flip_enemy : int = 0
-@onready var speed : int = 20
+@onready var speed : float
 
 @onready var stab : bool = false
 
