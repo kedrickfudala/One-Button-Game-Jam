@@ -27,6 +27,7 @@ window/stretch/mode="viewport"
 2d_physics/layer_4="enemies"
 2d_physics/layer_5="map_detect"
 2d_physics/layer_6="map_area"
+2d_physics/layer_7="enemy_attacks"
 
 [rendering]
 

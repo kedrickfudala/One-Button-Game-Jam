@@ -10,6 +10,8 @@ class_name Player
 @onready var chamber_sprite : Object = $ChamberSprite
 @onready var enemy_spawn_timer : Object = $EnemySpawnTimer
 @onready var hurtbox : Object = $Hurtbox
+@onready var score_label : Object = $ScoreLabel
+@onready var raycast : Object = $Sprite2D/Gun/RayCast2D
 
 @onready var chamber = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
@@ -17,7 +19,11 @@ class_name Player
 
 @onready var hearts : int = 3
 @onready var facing_direction : int = 1
+@onready var current_direction : int = 1
+@onready var alive : int = 1
 @onready var speed : int = 15
+
+@onready var score : int = 0
 
 func _ready():
 	input_timer.wait_time = 0.1
@@ -26,17 +32,47 @@ func _ready():
 	enemy_spawn_timer.one_shot = true
 
 func _physics_process(delta):
+	if alive == 1:
+		animation_player.play("walk")
+		alive_process()
+	else:
+		animation_player.play("dead")
+		$Sprite2D/Gun.visible = false
+	
+
+func alive_process():
+	if sprite.frame == 1:
+		if facing_direction == 1:
+			$Sprite2D/Gun.position.y = -1
+		else:
+			$Sprite2D/Gun.position.y = -2
+	if sprite.frame == 2:
+		if facing_direction == 1:
+			$Sprite2D/Gun.position.y = -2
+		else:
+			$Sprite2D/Gun.position.y = -3
+		
+	if get_global_mouse_position().x > self.global_position.x:
+		current_direction = 1
+	else:
+		current_direction = -1
+	if current_direction != facing_direction:
+		update_animations()
 	take_input()
 	move()
-	update_animations()
-	
+	update_score()
 	spawn_enemies()
+
 
 func fire():
 	chamber_slot = fmod(snapped(chamber_slot, 1), 6)
 	chamber_spin = 0
 	print("CSLOT " + str(chamber_slot) + " CSPIN " + str(chamber_spin))
 	print("FIRE " + str(chamber[chamber_slot]))
+	var enemy_hurtbox = raycast.get_collider()
+	if enemy_hurtbox != null:
+		enemy_hurtbox.get_parent().die()
+		
 
 func take_input():
 	if get_global_mouse_position().x > self.global_position.x:
@@ -65,12 +101,16 @@ func move():
 	velocity = Vector2(speed * facing_direction, 0)
 	move_and_slide()
 
+
 func update_animations():
 	if facing_direction < 0:
-		sprite.flip_h = 1
+		$Sprite2D.scale.x *= -1
 	elif facing_direction > 0:
-		sprite.flip_h = 0
+		$Sprite2D.scale.x *= -1
 		
+func update_score():
+	score_label.text = "Score: " + str(score)
+
 func spawn_enemies():
 	if enemy_spawn_timer.is_stopped():
 		var rng = RandomNumberGenerator.new()
@@ -80,3 +120,12 @@ func spawn_enemies():
 		else:
 			enemy_spawner2.spawn_enemy(-1)
 		enemy_spawn_timer.start()
+		
+
+func _on_hurtbox_area_entered(area):
+	var enemy = area.get_parent()
+	enemy.stab = true
+	alive = 0
+
+
+	

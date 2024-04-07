@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cguoafikkkcjk"]
+[gd_scene load_steps=3 format=3 uid="uid://cguoafikkkcjk"]
 
 [ext_resource type="Script" path="res://src/levels/world.gd" id="1_57tfk"]
+[ext_resource type="Texture2D" uid="uid://cvaptu0i5timb" path="res://assets/sprites/Beach-4-1.png" id="2_3mseg"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_57tfk")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.666667, 0.376471, 0, 1)
+motion_scale = Vector2(0.5, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_3mseg")
+region_enabled = true
+region_rect = Rect2(0, 0, 200000, 376)
