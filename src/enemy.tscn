@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5kwsjuwn0nux"]
+[gd_scene load_steps=6 format=3 uid="uid://c5kwsjuwn0nux"]
 
 [ext_resource type="Script" path="res://src/enemy.gd" id="1_p34i2"]
 [ext_resource type="Texture2D" uid="uid://d3p2wdvbxnj17" path="res://assets/sprites/enemyIdleanim.png" id="1_xquyi"]
@@ -9,13 +9,15 @@ size = Vector2(11, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wjgw"]
 size = Vector2(22, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6hv1"]
+size = Vector2(11, 30)
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_p34i2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 1, 1)
 position = Vector2(0, -16)
 texture = ExtResource("1_xquyi")
 
@@ -37,3 +39,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(5, -15)
 shape = SubResource("RectangleShape2D_1wjgw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_d6hv1")

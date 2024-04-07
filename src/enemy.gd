@@ -9,6 +9,8 @@ class_name Enemy
 @onready var facing_direction : int = 0
 @onready var speed : int = 17
 
+
+
 func _ready():
 	pass
 	

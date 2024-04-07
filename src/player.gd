@@ -19,6 +19,11 @@ class_name Player
 @onready var facing_direction : int = 1
 @onready var speed : int = 15
 
+@onready var raycast = $Gun/RayCast2D
+@onready var enemy = get_parent().get_node("Enemy")
+
+
+
 func _ready():
 	input_timer.wait_time = 0.1
 	input_timer.one_shot = true
@@ -31,12 +36,17 @@ func _physics_process(delta):
 	update_animations()
 	
 	spawn_enemies()
-
+	print(raycast.is_colliding())
 func fire():
 	chamber_slot = fmod(snapped(chamber_slot, 1), 6)
 	chamber_spin = 0
 	print("CSLOT " + str(chamber_slot) + " CSPIN " + str(chamber_spin))
 	print("FIRE " + str(chamber[chamber_slot]))
+	if(raycast.is_colliding()):
+		var hit_collider = raycast.get_collider()
+		print(hit_collider)
+		if hit_collider.name == enemy:
+			print("enemy killed")
 
 func take_input():
 	if get_global_mouse_position().x > self.global_position.x:
