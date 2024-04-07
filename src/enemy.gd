@@ -10,11 +10,15 @@ class_name Enemy
 @onready var animate : int = 1
 @onready var flip : int = 1
 @onready var flip_enemy : int = 0
-@onready var speed : int = 17
+@onready var speed : int = 20
 
 @onready var stab : bool = false
 
+@onready var colors : Array = [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.DEEP_SKY_BLUE, Color.PURPLE]
+@onready var color_slot : int
+
 func _ready():
+	sprite.modulate = colors[color_slot]
 	pass
 	
 func _physics_process(delta):
