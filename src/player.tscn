@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctbqfe6jsmrpf"]
+[gd_scene load_steps=15 format=3 uid="uid://ctbqfe6jsmrpf"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
-[ext_resource type="Texture2D" uid="uid://d3p2wdvbxnj17" path="res://assets/sprites/enemyIdleanim.png" id="2_jsyrq"]
+[ext_resource type="Texture2D" uid="uid://6qned3nwnwsa" path="res://assets/sprites/OBPlayer.png" id="2_bfe3f"]
 [ext_resource type="PackedScene" uid="uid://2q3gfbn6rw51" path="res://src/enemy_spawner.tscn" id="3_vxv3x"]
 [ext_resource type="Texture2D" uid="uid://drend5dvhqx5o" path="res://assets/sprites/chamber.png" id="4_8hpxv"]
 [ext_resource type="Texture2D" uid="uid://xdbrqisykt4i" path="res://assets/sprites/selectedSlot.png" id="5_g620u"]
 [ext_resource type="FontFile" uid="uid://cv4hf6knhmo43" path="res://assets/resources/cc.yal.6w6.block.uc.ttf" id="6_u4y3o"]
+[ext_resource type="PackedScene" uid="uid://cbtbq711c3puk" path="res://src/gun.tscn" id="7_upa5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ygii"]
 size = Vector2(11, 30)
@@ -16,8 +17,62 @@ size = Vector2(11, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ciftm"]
 size = Vector2(384, 216)
 
+[sub_resource type="Animation" id="Animation_fow3l"]
+resource_name = "walk"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_hmap2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kykme"]
+resource_name = "dead"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ky2m3"]
+_data = {
+"RESET": SubResource("Animation_hmap2"),
+"dead": SubResource("Animation_kykme"),
+"walk": SubResource("Animation_fow3l")
+}
+
 [node name="Player" type="CharacterBody2D"]
-z_index = 2
+z_as_relative = false
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_fq5sw")
@@ -32,11 +87,16 @@ zoom = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("2_jsyrq")
+texture = ExtResource("2_bfe3f")
+hframes = 4
+
+[node name="Gun" parent="Sprite2D" instance=ExtResource("7_upa5e")]
+position = Vector2(12, -2)
 
 [node name="Hurtbox" type="Area2D" parent="."]
+z_as_relative = false
 collision_layer = 2
-collision_mask = 8
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-0.5, -15)
@@ -53,6 +113,9 @@ shape = SubResource("RectangleShape2D_ciftm")
 [node name="InputTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ky2m3")
+}
 
 [node name="EnemySpawner1" parent="." instance=ExtResource("3_vxv3x")]
 position = Vector2(-200, 0)
@@ -83,10 +146,4 @@ offset_bottom = -59.0
 theme_override_fonts/normal_font = ExtResource("6_u4y3o")
 text = "Score: "
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, -15)
-target_position = Vector2(-100, 0)
-collision_mask = 8
-hit_from_inside = true
-collide_with_areas = true
-collide_with_bodies = false
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

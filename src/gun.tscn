@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbtbq711c3puk"]
+
+[ext_resource type="Texture2D" uid="uid://culiif5rj4j8o" path="res://assets/sprites/OBGun.png" id="1_df817"]
+
+[node name="Gun" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_df817")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(4, 0)
+scale = Vector2(4.59928, -0.596768)
+target_position = Vector2(23, 0)
+collision_mask = 8
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
