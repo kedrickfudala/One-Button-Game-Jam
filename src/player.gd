@@ -25,8 +25,9 @@ class_name Player
 @onready var alive : int = 1
 @onready var speed : int = 15
 
+@onready var base_score : int = 100
 @onready var score : int = 0
-@onready var combo : int = 0
+@onready var combo : int = 1
 
 func _ready():
 	input_timer.wait_time = 0.1
@@ -74,9 +75,14 @@ func fire():
 	if enemy_hurtbox != null:
 		var enemy = enemy_hurtbox.get_parent()
 		world.draw_shot(gun.global_position, enemy.global_position.x, chamber_slot)
-		queue_redraw()
 		if self.chamber_slot == enemy.color_slot:
+			combo += 1
+			score += (base_score * (0.5 * combo))
 			enemy.die()
+		else:
+			combo = 0
+	if combo % 25 == 0:
+		base_score += 50
 
 func take_input():
 	if get_global_mouse_position().x > self.global_position.x:
