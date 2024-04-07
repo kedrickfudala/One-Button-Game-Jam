@@ -10,7 +10,9 @@ func _ready():
 
 func spawn_enemy(facing_direction : int):
 	var enemy_inst = enemy.instantiate()
+	var rng = RandomNumberGenerator.new()
+	var random_color = snapped(rng.randf_range(0, 5), 1)
 	enemy_inst.global_position = self.global_position
-
+	enemy_inst.color_slot = random_color
 	get_parent().get_parent().add_child(enemy_inst)
 	enemy_inst.facing_direction = facing_direction
