@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0h87j1vh34c1"]
+
+[ext_resource type="PackedScene" uid="uid://cxmvg6ugpwffk" path="res://src/interface/main_menu_buttons.tscn" id="1_pusp2"]
+[ext_resource type="FontFile" uid="uid://cv4hf6knhmo43" path="res://assets/resources/cc.yal.6w6.block.uc.ttf" id="2_b2m0g"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="MainMenuButtons" parent="." instance=ExtResource("1_pusp2")]
+offset_top = 121.0
+offset_bottom = 121.0
+
+[node name="MarginContainer" parent="MainMenuButtons/VBoxContainer" index="1"]
+theme_override_constants/margin_top = 20
+
+[node name="Rainbow" type="RichTextLabel" parent="."]
+offset_left = 268.0
+offset_top = 128.0
+offset_right = 898.0
+offset_bottom = 389.0
+theme_override_fonts/normal_font = ExtResource("2_b2m0g")
+theme_override_font_sizes/normal_font_size = 191
+bbcode_enabled = true
+text = "[color=red]R[/color][color=orange]A[/color][color=yellow]I[/color][color=green]N[/color][color=blue]B[/color][color=purple]O[/color][color=violet]W[/color]
+Ranger"
+
+[editable path="MainMenuButtons"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cev2hb4n4kkeh"]
+
+[ext_resource type="Texture2D" uid="uid://cvaptu0i5timb" path="res://assets/sprites/Beach-4-1.png" id="1_bs874"]
+[ext_resource type="Texture2D" uid="uid://ciwcqv58yuvmi" path="res://assets/sprites/OBCactus.png" id="2_hv1d2"]
+
+[node name="CanyonBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+modulate = Color(0.666667, 0.376471, 0, 1)
+motion_scale = Vector2(0.5, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture_repeat = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_bs874")
+region_enabled = true
+region_rect = Rect2(0, 0, 200000, 376)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+position = Vector2(2, -115)
+motion_scale = Vector2(0.75, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture_repeat = 2
+position = Vector2(-52, 92)
+texture = ExtResource("2_hv1d2")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 48)
