@@ -13,8 +13,10 @@ class_name Player
 @onready var score_label : Object = $ScoreLabel
 @onready var raycast : Object = $Sprite2D/Gun/RayCast2D
 @onready var gun : Object = $Sprite2D/Gun
+@onready var particles : Object = $Sprite2D/GPUParticles2D
 @onready var world : Object = get_parent()
 
+@onready var colors : Array = [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.DEEP_SKY_BLUE, Color.PURPLE]
 @onready var chamber : Array = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
 @onready var chamber_spin : float = 0.0
@@ -128,6 +130,9 @@ func spawn_enemies():
 			enemy_spawner1.spawn_enemy(1)
 		else:
 			enemy_spawner2.spawn_enemy(-1)
+		if enemy_spawn_timer.wait_time > 2:
+			enemy_spawn_timer.wait_time -= 0.05
+			print(enemy_spawn_timer.wait_time)
 		enemy_spawn_timer.start()
 
 func die():
@@ -137,5 +142,7 @@ func die():
 func _on_hurtbox_area_entered(area):
 	var enemy = area.get_parent()
 	enemy.stab = true
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", colors[enemy.color_slot], 1)
 	if alive:
 		die()

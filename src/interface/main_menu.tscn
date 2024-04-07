@@ -6,8 +6,11 @@
 [node name="MainMenu" type="CanvasLayer"]
 
 [node name="MainMenuButtons" parent="." instance=ExtResource("1_pusp2")]
-offset_top = 172.0
-offset_bottom = 172.0
+offset_top = 121.0
+offset_bottom = 121.0
+
+[node name="MarginContainer" parent="MainMenuButtons/VBoxContainer" index="1"]
+theme_override_constants/margin_top = 20
 
 [node name="Rainbow" type="RichTextLabel" parent="."]
 offset_left = 268.0
@@ -19,3 +22,5 @@ theme_override_font_sizes/normal_font_size = 191
 bbcode_enabled = true
 text = "[color=red]R[/color][color=orange]A[/color][color=yellow]I[/color][color=green]N[/color][color=blue]B[/color][color=purple]O[/color][color=violet]W[/color]
 Ranger"
+
+[editable path="MainMenuButtons"]

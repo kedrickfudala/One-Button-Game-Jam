@@ -26,5 +26,10 @@ autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="MainMenuButtons" parent="." instance=ExtResource("1_2unuu")]
-offset_top = 144.0
-offset_bottom = 144.0
+offset_top = -48.0
+offset_bottom = -48.0
+
+[node name="MarginContainer" parent="MainMenuButtons/VBoxContainer" index="1"]
+theme_override_constants/margin_top = 20
+
+[editable path="MainMenuButtons"]

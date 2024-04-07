@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctbqfe6jsmrpf"]
+[gd_scene load_steps=16 format=3 uid="uid://ctbqfe6jsmrpf"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
 [ext_resource type="Texture2D" uid="uid://6qned3nwnwsa" path="res://assets/sprites/OBPlayer.png" id="2_bfe3f"]
@@ -10,6 +10,13 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ygii"]
 size = Vector2(11, 30)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fq88a"]
+particle_flag_disable_z = true
+spread = 10.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1iaq"]
 size = Vector2(11, 30)
@@ -92,6 +99,13 @@ hframes = 4
 
 [node name="Gun" parent="Sprite2D" instance=ExtResource("7_upa5e")]
 position = Vector2(12, -2)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+position = Vector2(12, -2)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_fq88a")
+lifetime = 10.0
+randomness = 1.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 z_as_relative = false
