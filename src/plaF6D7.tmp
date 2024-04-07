@@ -2,13 +2,10 @@
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
 [ext_resource type="Texture2D" uid="uid://d3p2wdvbxnj17" path="res://assets/sprites/enemyIdleanim.png" id="2_jsyrq"]
+[ext_resource type="PackedScene" uid="uid://cfm6cb5li3ojn" path="res://src/gun.tscn" id="3_0opbc"]
 [ext_resource type="PackedScene" uid="uid://2q3gfbn6rw51" path="res://src/enemy_spawner.tscn" id="3_vxv3x"]
 [ext_resource type="Texture2D" uid="uid://drend5dvhqx5o" path="res://assets/sprites/chamber.png" id="4_8hpxv"]
 [ext_resource type="Texture2D" uid="uid://xdbrqisykt4i" path="res://assets/sprites/selectedSlot.png" id="5_g620u"]
-[ext_resource type="FontFile" uid="uid://cv4hf6knhmo43" path="res://assets/resources/cc.yal.6w6.block.uc.ttf" id="6_u4y3o"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ygii"]
-size = Vector2(11, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1iaq"]
 size = Vector2(11, 30)
@@ -16,15 +13,14 @@ size = Vector2(11, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ciftm"]
 size = Vector2(384, 216)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5miv1"]
+size = Vector2(11, 30)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
 collision_layer = 2
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_fq5sw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -15)
-shape = SubResource("RectangleShape2D_2ygii")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -40)
@@ -75,18 +71,14 @@ texture = ExtResource("5_g620u")
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="ScoreLabel" type="RichTextLabel" parent="."]
-offset_left = -110.0
-offset_top = -99.0
-offset_right = -5.0
-offset_bottom = -59.0
-theme_override_fonts/normal_font = ExtResource("6_u4y3o")
-text = "Score: "
+[node name="Gun" parent="." instance=ExtResource("3_0opbc")]
+position = Vector2(-10, -16)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, -15)
-target_position = Vector2(-100, 0)
+[node name="RayCast2D" parent="Gun" index="1"]
 collision_mask = 8
-hit_from_inside = true
-collide_with_areas = true
-collide_with_bodies = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -15)
+shape = SubResource("RectangleShape2D_5miv1")
+
+[editable path="Gun"]

@@ -41,8 +41,10 @@ func fire():
 	chamber_spin = 0
 	print("CSLOT " + str(chamber_slot) + " CSPIN " + str(chamber_spin))
 	print("FIRE " + str(chamber[chamber_slot]))
-	var test = raycast.get_collider()
-	print(test)
+	var enemy_hurtbox = raycast.get_collider()
+	print(enemy_hurtbox)
+	if enemy_hurtbox != null:
+		enemy_hurtbox.get_parent().die()
 
 func take_input():
 	if get_global_mouse_position().x > self.global_position.x:
