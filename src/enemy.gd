@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
+@onready var score_popup : PackedScene = preload("res://src/interface/score_popup.tscn")
+
 @onready var sprite : Object = $Sprite2D
 @onready var animation_player : Object = $AnimationPlayer
 @onready var hitbox : Object = $Hitbox
@@ -39,4 +41,8 @@ func move():
 		animation_player.play("stab")
 		
 func die():
+	#var popup_inst = score_popup.instantiate()
+	##pup_inst.global_position = self.global_position
+	#get_parent().add_child(popup_inst)
+	#popup_inst.label.global_position = self.global_position
 	self.queue_free()

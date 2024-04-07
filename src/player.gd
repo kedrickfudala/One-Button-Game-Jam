@@ -138,7 +138,7 @@ func update_animations():
 		sprite.scale.x = -1
 
 func update_score():
-	score_label.text = "Score: " + str(score)
+	score_label.text = "Score: " + str(score) + "\n\nCombo: x" + str((combo - 1) / 2.0)
 
 func spawn_enemies():
 	if enemy_spawn_timer.is_stopped():

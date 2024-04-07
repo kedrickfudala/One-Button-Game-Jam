@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://1bmb8xqrimf"]
+
+[ext_resource type="FontFile" uid="uid://cv4hf6knhmo43" path="res://assets/resources/cc.yal.6w6.block.uc.ttf" id="1_r3526"]
+[ext_resource type="Script" path="res://src/interface/score_popup.gd" id="2_vye1y"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("2_vye1y")
+
+[node name="Label" type="Label" parent="."]
+z_index = 32
+offset_left = -18.0
+offset_top = 23.0
+offset_right = 140.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("1_r3526")
+theme_override_font_sizes/font_size = 51
+text = "x2"

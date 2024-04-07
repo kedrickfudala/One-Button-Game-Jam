@@ -15,6 +15,7 @@ extends Node2D
 @onready var shot_color : Color = shot_colors[0]
 
 @onready var game_running : bool = false
+@onready var high_score : int = 0
 
 func _ready():
 	RenderingServer.set_default_clear_color(Color.SKY_BLUE)
@@ -70,6 +71,8 @@ func spawn_draw_timer():
 	add_child(draw_timer)
 
 func game_over():
+	if player.score > high_score:
+		high_score = player.score
 	var game_over_screen = game_over_menu.instantiate()
 	add_child(game_over_screen)
 

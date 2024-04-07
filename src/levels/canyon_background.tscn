@@ -14,7 +14,7 @@ texture_repeat = 2
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_bs874")
 region_enabled = true
-region_rect = Rect2(0, 0, 200000, 376)
+region_rect = Rect2(0, 0, 20000, 376)
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
 position = Vector2(2, -115)
