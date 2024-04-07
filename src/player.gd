@@ -118,7 +118,6 @@ func spawn_enemies():
 	if enemy_spawn_timer.is_stopped():
 		var rng = RandomNumberGenerator.new()
 		var random_number = snapped(rng.randf_range(0, 1), 1)
-		print(random_number)
 		if random_number == 0:
 			enemy_spawner1.spawn_enemy(1)
 		else:
