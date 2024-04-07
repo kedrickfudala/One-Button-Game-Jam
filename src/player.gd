@@ -35,7 +35,7 @@ func _ready():
 	enemy_spawn_timer.wait_time = 4
 	enemy_spawn_timer.one_shot = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if alive == 1:
 		animation_player.play("walk")
 		alive_process()
@@ -129,8 +129,13 @@ func spawn_enemies():
 		else:
 			enemy_spawner2.spawn_enemy(-1)
 		enemy_spawn_timer.start()
-		
+
+func die():
+	alive = 0
+	world.game_over()
+
 func _on_hurtbox_area_entered(area):
 	var enemy = area.get_parent()
 	enemy.stab = true
-	alive = 0
+	if alive:
+		die()

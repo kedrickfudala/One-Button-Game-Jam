@@ -21,7 +21,7 @@ func _ready():
 	sprite.modulate = colors[color_slot]
 	pass
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if facing_direction != 0 and flip:
 		flip_enemy = facing_direction
 	if flip_enemy < 0:

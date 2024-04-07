@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0h87j1vh34c1"]
+
+[ext_resource type="PackedScene" uid="uid://cxmvg6ugpwffk" path="res://src/interface/main_menu_buttons.tscn" id="1_pusp2"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="MainMenuButtons" parent="." instance=ExtResource("1_pusp2")]
+offset_top = 100.0
+offset_bottom = 100.0

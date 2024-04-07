@@ -1,26 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cguoafikkkcjk"]
 
 [ext_resource type="Script" path="res://src/levels/world.gd" id="1_57tfk"]
-[ext_resource type="PackedScene" uid="uid://cxmvg6ugpwffk" path="res://src/interface/main_menu_buttons.tscn" id="2_absr7"]
+[ext_resource type="PackedScene" uid="uid://c0h87j1vh34c1" path="res://src/interface/main_menu.tscn" id="2_rgsxp"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_57tfk")
 
-[node name="MainMenuButtons" parent="." instance=ExtResource("2_absr7")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="VBoxContainer" parent="MainMenuButtons" index="0"]
-anchors_preset = 8
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 255.0
-offset_top = 85.0
-offset_right = 895.0
-offset_bottom = 729.0
-grow_vertical = 2
-
-[editable path="MainMenuButtons"]
+[node name="MainMenu" parent="." instance=ExtResource("2_rgsxp")]

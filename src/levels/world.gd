@@ -3,6 +3,9 @@ extends Node2D
 @onready var map_segment : PackedScene = preload("res://src/levels/map_segment.tscn")
 @onready var player_scene : PackedScene = preload("res://src/player.tscn")
 @onready var canyon_background : PackedScene = preload("res://src/levels/canyon_background.tscn")
+
+@onready var game_over_menu : PackedScene = preload("res://src/interface/game_over_menu.tscn")
+
 @onready var player : Object
 @onready var draw_timer : Object
 
@@ -16,7 +19,7 @@ extends Node2D
 func _ready():
 	RenderingServer.set_default_clear_color(Color.SKY_BLUE)
 
-func _process(delta):
+func _process(_delta):
 	if game_running:
 		if draw_timer.is_stopped():
 			target_x = null
@@ -53,9 +56,9 @@ func spawn_backgrounds():
 	var background1_inst = canyon_background.instantiate()
 	add_child(background1_inst)
 
-func draw_shot(gun_pos, target_x, chamber_slot):
-	self.gun_pos = gun_pos
-	self.target_x = target_x
+func draw_shot(gun_pos2, target_x2, chamber_slot):
+	self.gun_pos = gun_pos2
+	self.target_x = target_x2
 	self.shot_color = shot_colors[chamber_slot]
 	queue_redraw()
 	draw_timer.start()
@@ -65,7 +68,12 @@ func spawn_draw_timer():
 	draw_timer.wait_time = 0.1
 	draw_timer.one_shot = true
 	add_child(draw_timer)
-	
+
+func game_over():
+	var game_over_screen = game_over_menu.instantiate()
+	#game_over_screen.global_position = Vector2(0, 0)
+	add_child(game_over_screen)
+
 func _draw():
 	if target_x and gun_pos:
 		draw_line(gun_pos, Vector2(target_x, gun_pos.y), shot_color, 1.0)

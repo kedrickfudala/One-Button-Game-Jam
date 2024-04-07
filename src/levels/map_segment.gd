@@ -9,7 +9,7 @@ class_name MapSegment
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if !near_player:
 		if player_inst.global_position.x > self.global_position.x:
 			world.spawn_map(offset + 2)
