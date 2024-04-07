@@ -71,9 +71,9 @@ func spawn_draw_timer():
 
 func game_over():
 	var game_over_screen = game_over_menu.instantiate()
-	#game_over_screen.global_position = Vector2(0, 0)
 	add_child(game_over_screen)
 
 func _draw():
 	if target_x and gun_pos:
-		draw_line(gun_pos, Vector2(target_x, gun_pos.y), shot_color, 1.0)
+		draw_line(gun_pos, Vector2(target_x, gun_pos.y), shot_color, 0.5)
+		pass

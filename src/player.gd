@@ -14,6 +14,8 @@ class_name Player
 @onready var raycast : Object = $Sprite2D/Gun/RayCast2D
 @onready var gun : Object = $Sprite2D/Gun
 @onready var particles : Object = $Sprite2D/GPUParticles2D
+@onready var draw_timer : Object = $DrawTimer
+@onready var death_particles : Object = $Sprite2D/DeathParticles
 @onready var world : Object = get_parent()
 
 @onready var colors : Array = [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.DEEP_SKY_BLUE, Color.PURPLE]
@@ -36,6 +38,9 @@ func _ready():
 	input_timer.one_shot = true
 	enemy_spawn_timer.wait_time = 4
 	enemy_spawn_timer.one_shot = true
+	draw_timer.wait_time = 0.1
+	draw_timer.one_shot = true
+	death_particles.emitting = false
 
 func _physics_process(_delta):
 	if alive == 1:
@@ -44,6 +49,11 @@ func _physics_process(_delta):
 	else:
 		animation_player.play("dead")
 		gun.visible = false
+	
+	if draw_timer.is_stopped():
+		particles.emitting = false
+	else:
+		particles.emitting = true
 
 func alive_process():
 	if sprite.frame == 1:
@@ -77,12 +87,15 @@ func fire():
 	if enemy_hurtbox != null:
 		var enemy = enemy_hurtbox.get_parent()
 		world.draw_shot(gun.global_position, enemy.global_position.x, chamber_slot)
+		particles.modulate = colors[chamber_slot]
+		draw_timer.start()
 		if self.chamber_slot == enemy.color_slot:
 			combo += 1
 			score += (base_score * (0.5 * combo))
 			enemy.die()
 		else:
 			combo = 0
+		particles.emitting = false
 	if combo % 25 == 0:
 		base_score += 50
 
@@ -137,6 +150,7 @@ func spawn_enemies():
 
 func die():
 	alive = 0
+	death_particles.emitting = true
 	world.game_over()
 
 func _on_hurtbox_area_entered(area):
