@@ -6,7 +6,7 @@ class_name EnemySpawner
 @onready var world : Object = player.get_parent()
 
 func _ready():
-	print(player.hearts)
+	pass
 
 func spawn_enemy(facing_direction : int):
 	var enemy_inst = enemy.instantiate()

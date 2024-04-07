@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var map_segment : PackedScene = preload("res://src/levels/map_segment.tscn")
-
 @onready var player_scene : PackedScene = preload("res://src/player.tscn")
 @onready var player : Object
 
@@ -23,4 +22,5 @@ func spawn_player():
 func spawn_map(offset : int):
 	var map_inst = map_segment.instantiate()
 	map_inst.global_position = Vector2(offset * 16 * 20, 0)
+	map_inst.offset = offset
 	add_child(map_inst)

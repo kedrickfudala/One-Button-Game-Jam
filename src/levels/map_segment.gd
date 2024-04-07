@@ -3,8 +3,11 @@ class_name MapSegment
 
 @onready var near_player : bool = true
 @onready var world : Object = get_parent()
-@onready var offset : int = global_position.x / (16 * 20)
+@onready var offset : int
 @onready var player_inst : Object = world.player
+
+func _ready():
+	pass
 
 func _process(delta):
 	if !near_player:

@@ -12,6 +12,7 @@ class_name Player
 @onready var hurtbox : Object = $Hurtbox
 @onready var score_label : Object = $ScoreLabel
 @onready var raycast : Object = $RayCast2D
+@onready var camera : Object = $Camera2D
 
 @onready var chamber = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
 @onready var chamber_slot : float = 0.0
@@ -19,7 +20,7 @@ class_name Player
 
 @onready var hearts : int = 3
 @onready var facing_direction : int = 1
-@onready var speed : int = 15
+@onready var speed : int = 25
 
 @onready var score : int = 0
 
