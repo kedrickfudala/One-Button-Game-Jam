@@ -3,6 +3,8 @@ extends Node2D
 @onready var map_segment : PackedScene = preload("res://src/levels/map_segment.tscn")
 @onready var player_scene : PackedScene = preload("res://src/player.tscn")
 @onready var canyon_background : PackedScene = preload("res://src/levels/canyon_background.tscn")
+@onready var powerup : PackedScene = preload("res://src/powerup.tscn")
+
 
 @onready var game_over_menu : PackedScene = preload("res://src/interface/game_over_menu.tscn")
 
@@ -19,6 +21,16 @@ extends Node2D
 
 func _ready():
 	RenderingServer.set_default_clear_color(Color.SKY_BLUE)
+	if not FileAccess.file_exists("res://highscore.txt"):
+		create_highscore()
+	else:
+		var file = FileAccess.open("res://highscore.txt", FileAccess.READ)
+		high_score = int(file.get_as_text())
+
+
+func create_highscore():
+	var file = FileAccess.open("res://highscore.txt", FileAccess.WRITE)
+	file.store_string("0")
 
 func _process(_delta):
 	if game_running:
@@ -73,6 +85,8 @@ func spawn_draw_timer():
 func game_over():
 	if player.score > high_score:
 		high_score = player.score
+		var file = FileAccess.open("res://highscore.txt", FileAccess.WRITE)
+		file.store_string(str(high_score))
 	var game_over_screen = game_over_menu.instantiate()
 	add_child(game_over_screen)
 
@@ -80,3 +94,11 @@ func _draw():
 	if target_x and gun_pos:
 		draw_line(gun_pos, Vector2(target_x, gun_pos.y), shot_color, 0.5)
 		pass
+		
+func spawn_powerup(enemy):
+	var star = powerup.instantiate()
+	add_child(star)
+	star.global_position = enemy.global_position
+	star.global_position.y -= 20
+
+

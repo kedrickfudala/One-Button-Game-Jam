@@ -28,6 +28,7 @@ window/stretch/mode="viewport"
 2d_physics/layer_5="map_detect"
 2d_physics/layer_6="map_area"
 2d_physics/layer_7="enemy_attacks"
+2d_physics/layer_8="powerup"
 
 [rendering]
 

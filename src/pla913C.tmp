@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ctbqfe6jsmrpf"]
+[gd_scene load_steps=21 format=3 uid="uid://ctbqfe6jsmrpf"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_fq5sw"]
 [ext_resource type="Texture2D" uid="uid://6qned3nwnwsa" path="res://assets/sprites/OBPlayer.png" id="2_bfe3f"]
@@ -101,8 +101,6 @@ _data = {
 "walk": SubResource("Animation_fow3l")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ja6aj"]
-
 [node name="Player" type="CharacterBody2D"]
 z_as_relative = false
 collision_layer = 2
@@ -197,32 +195,4 @@ text = "Score: "
 [node name="RateDecreaseTimer" type="Timer" parent="."]
 wait_time = 10.0
 
-[node name="Label" type="Label" parent="."]
-z_index = 32
-anchors_preset = -1
-anchor_left = -0.027
-anchor_top = -0.019
-anchor_right = 0.011
-anchor_bottom = -0.002
-offset_left = -51.0
-offset_top = -63.0
-offset_right = 155.0
-offset_bottom = -36.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("6_u4y3o")
-theme_override_font_sizes/font_size = 32
-text = "5x Combo!
-Base Score +50
-"
-horizontal_alignment = 1
-
-[node name="PowerupArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 128
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupArea"]
-position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_ja6aj")
-
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="area_entered" from="PowerupArea" to="." method="_on_powerup_area_area_entered"]
